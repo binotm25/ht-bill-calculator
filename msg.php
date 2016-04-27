@@ -2,7 +2,7 @@
 
 //extract data from the post
 //set POST variables
-http://203.212.70.200/smpp/sendsms?username=manipurstate1&password=sejt8634&to=mobileno&from=MSPDCL&text=yourmessagehereUrlencoded
+http://203.212.70.200/smpp/sendsms?username=username&password=password&to=mobileno&from=MSPDCL&text=yourmessagehereUrlencoded
 $msg = urlencode('Checking if this works or not - From HT Bill.');
 $phn = ["8131940554"];
 
@@ -25,3 +25,4 @@ for($i = 0; $i < sizeof($phn); $i++){
 	echo $content;
 }
 curl_close($ch);
+
