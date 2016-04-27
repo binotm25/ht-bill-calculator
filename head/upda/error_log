@@ -1,0 +1,17 @@
+[02-Apr-2016 14:04:01 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:04:47 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:04:56 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:05:30 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:05:36 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:06:12 Asia/Kolkata] PHP Fatal error:  Call to undefined method dbConx::checkAttr() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 67
+[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 38
+[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli_query(): Couldn't fetch mysqli in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 51
+[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 52
+[02-Apr-2016 14:10:16 Asia/Kolkata] PHP Notice:  Undefined index: attr in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 105
+[02-Apr-2016 14:12:25 Asia/Kolkata] PHP Notice:  Undefined index: attr in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 105
+[02-Apr-2016 14:12:35 Asia/Kolkata] PHP Notice:  Undefined index: attr in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 105
+[02-Apr-2016 14:12:51 Asia/Kolkata] PHP Notice:  Undefined index: attr in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 105
+[02-Apr-2016 14:13:38 Asia/Kolkata] PHP Fatal error:  Call to undefined method settings::getSubAll() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 196
+[02-Apr-2016 14:16:37 Asia/Kolkata] PHP Fatal error:  Call to undefined method settings::getSubAll() in /home/adminarun1/public_html/mspdcl/head/upda/settings.php on line 196
+[02-Apr-2016 15:06:11 Asia/Kolkata] PHP Notice:  Undefined variable: gm_id in /home/adminarun1/public_html/mspdcl/php_includes/class.Settings.php on line 13
+[02-Apr-2016 15:06:59 Asia/Kolkata] PHP Notice:  Undefined variable: gm_id in /home/adminarun1/public_html/mspdcl/php_includes/class.Settings.php on line 13
