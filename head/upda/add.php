@@ -44,17 +44,25 @@ $messageCount = $message[0];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Feeder Reports</title>
+    <title>Add New Reports</title>
     <link href="/css/pace/SideBardataurl.css" rel="stylesheet" />
     <script src="/js/pace.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/local.css" />
+    <style>
+    </style>
 </head>
 <body>
 <div id="wrapper">
 <img src="/img/equilizer.gif" class="img-responsive" id="loading">
-        <?php include_once('nav.php'); ?><h5 class="text-center" id="count"></h5>
+        <?php include_once('nav.php');
+      if(!$db->checkAttr()){
+        echo "<h2 class='text-center bg-warning'>You don't have the authorization to Enter this Page!</h2>";
+        die();
+      }
+    ?>
+    <h5 class="text-center" id="count"></h5>
     <div id="page-wrapper">
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -105,8 +113,8 @@ $messageCount = $message[0];
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/components-setup.min.js"></script>
 <script>
   $("#count").text("Total Number of Feeders : <?= $count; ?>");
@@ -114,6 +122,7 @@ $messageCount = $message[0];
   var column = "<?= $res->column; ?>";
   var table = "<?= $res->table; ?>";
 </script>
+<script src="/js/moment.min.js"></script>
 <script src="/js/form.js"></script>
 </body>
 </html>

@@ -1,3 +1,0 @@
-[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: YES) in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 38
-[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli_query(): Couldn't fetch mysqli in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 51
-[02-Apr-2016 14:07:24 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/adminarun1/public_html/mspdcl/php_includes/class.DB.php on line 52

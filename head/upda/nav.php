@@ -6,15 +6,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.php">Admin Panel</a>
+        <a class="navbar-brand" href="reports">Admin Panel</a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li id="reports"><a href="reports"><i class="fa fa-bullseye"></i> Dashboard</a></li>
-            <li id="add"><a href="add"><i class="fa fa-tasks"></i> Add New Reports</a></li>                    
+            <li id="add"><a href="add"><i class="fa fa-tasks"></i> Add New Reports</a></li>
+            <li id="daily"><a href="daily"><i class="fa fa-tasks"></i> Add Daily Reports</a></li>                    
             <li id="update"><a href="update"><i class="fa fa-globe"></i> Update Reports</a></li>
             <li id="settings"><a href="settings"><i class="fa fa-list-ol"></i> Settings</a></li>
-            <li class="logout"><a href="#"><i class="fa fa-list-ul"></i> Logout</a></li>
+            <li class="logout"><a href="logout"><i class="fa fa-list-ul"></i> Logout</a></li>
             <!-- <li><a href="typography.html"><i class="fa fa-font"></i> Typography</a></li>
             <li><a href="bootstrap-grid.html"><i class="fa fa-table"></i > Bootstrap Grid</a></li>  -->
         </ul>

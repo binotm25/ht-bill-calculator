@@ -11,37 +11,12 @@ if(!$db->userOk()){
   header('Location: ../log/login');
   exit();
 }
-if(isset($_POST['username']) && isset($_POST['email'])){
-  if(empty($_POST['email']) || empty($_POST['username'])){
-    echo "minai";
-  }else{
-    $db->logOut();
-    echo "LogOut";
-    exit();
-  }
-}
 
 $res = new settings($db_conx);
-if(isset($_POST['sub_name']) && isset($_POST['gm'])){
-    echo $res->addSub($_POST['sub_name'], $_POST['gm']);
-    exit();
-}
-if(isset($_POST['gm']) && isset($_POST['checkForSub'])){
-  echo $res->getSubPerGm($_POST['gm']);
-  exit();
-}
-if(isset($_POST['sub_id']) && isset($_POST['feeder_name'])){
-  echo $res->addNewFeeder($_POST['sub_id'], $_POST['feeder_name']);
-  exit();
-}
-if(isset($_POST['removeSubId']) && isset($_POST['wathi_removeSubId'])){
-  echo $res->removeSubstation($_POST['removeSubId'], $_POST['wathi_removeSubId']);
-  exit();
-}
 
-if(isset($_POST['removeFeederId']) && isset($_POST['wathi_removeFeedId'])){
-  echo $res->removeFeeder($_POST['removeFeederId'], $_POST['wathi_removeFeedId']);
-  exit();
+if($_POST){
+    $result = $res->postRequest($_POST);
+    exit();
 }
 
 $noti = new Noti($db_conx);
@@ -56,9 +31,11 @@ $messageCount = $message[0];
     <title>Settings</title>
     <link href="/css/pace/SideBardataurl.css" rel="stylesheet" />
     <script src="/js/pace.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/local.css" />
+    <style>
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -75,6 +52,15 @@ $messageCount = $message[0];
       </div>
       <div class="col-sm-6 text-left">
         <button id="removeSub" class="btn btn-danger wathi-form">Remove A Sub-Station</button>
+      </div>
+    </div>
+    <div class="gap80"></div>
+    <div class="row">
+      <div class="col-sm-6 text-right">
+        <button id="editSub" class="btn btn-success wathi-form">Edit A Sub-Station</button>
+      </div>
+      <div class="col-sm-6 text-left">
+        <button id="editFeeder" class="btn btn-danger wathi-form">Edit A Feeder</button>
       </div>
     </div>
     <div class="gap80"></div>
@@ -226,6 +212,29 @@ $messageCount = $message[0];
             <div class="modal-body">
                 <form class="form-horizontal" onclick="return false">
                   <div class="form-group">
+                    <label for="sub_id_tobe" class="col-sm-4 control-label">Substation</label>
+                    <div class="col-sm-8">
+                      <select name="sub_id_tobe" class="form-control sub_id_tobe">
+                        <option value="">Choose the Sub-Station</option>
+                        <?php
+                          $query = $res->getSubAll();
+                          while($row = $query->fetch_assoc()){
+                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group sub-form-feed">
+                    <label for="remove-feed" class="col-sm-4 control-label">Feeder</label>
+                    <div class="col-sm-8">
+                      <select id="remove-feed" class="form-control new-feed" multiple="multiple" size="10">
+                        <option value="">Choose the Feeder</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group ">
                     <label for="remove-feed" class="col-sm-4 control-label">Feeder</label>
                     <div class="col-sm-8">
                       <select name="remove-feed" id="remove-feed" class="form-control" multiple="multiple" size="10">
@@ -238,10 +247,105 @@ $messageCount = $message[0];
                         ?>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
                       <button type="submit" class="btn btn-danger" id="remove-feeder">Remove Feeder</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modalLarge-editSub" tabindex="-1" role="dialog" aria-labelledby="modalLargeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalLargeLabel">Edit Sub-Station/Sub-Stations</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" onclick="return false">
+                  <div class="form-group">
+                    <label for="edit-Sub" class="col-sm-4 control-label">Sub-Station</label>
+                    <div class="col-sm-8">
+                      <select name="edit-Sub" id="edit-Sub" class="form-control" multiple="multiple" size="10">
+                        <?php
+                          $query = $res->getSubAll();
+                          while($row = $query->fetch_assoc()){
+                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group user-edit" id="sub-edit">
+                    <label for="new-edited-sub" class="col-sm-4 control-label">Sub-Station</label>
+                      <div class="col-sm-8">
+                        <input type="text" placeholder="Your New Edited Version" id="new-edited-sub" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                      <button type="submit" class="btn btn-danger" id="edit-substation">Edit Sub-Station</button>
+                    </div>
+                  </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="modalLarge-editFeeder" tabindex="-1" role="dialog" aria-labelledby="modalLargeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalLargeLabel">Edit Feeder/Feeders</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" onclick="return false">
+                  <div class="form-group">
+                    <label for="sub_id_tobe" class="col-sm-4 control-label">Substation</label>
+                    <div class="col-sm-8">
+                      <select name="sub_id_tobe" class="form-control sub_id_tobe">
+                        <option value="">Choose the Sub-Station</option>
+                        <?php
+                          $query = $res->getSubAll();
+                          while($row = $query->fetch_assoc()){
+                            echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group sub-form-feed">
+                    <label for="edit-feed" class="col-sm-4 control-label">Feeder</label>
+                    <div class="col-sm-8">
+                      <select name="feed-edit" id="edit" class="form-control new-feed" multiple="multiple" size="10">
+                        <option value="">Choose the Feeder</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group user-edit" id="feed-edit">
+                    <label for="new-edited-feed" class="col-sm-4 control-label">Feeder</label>
+                      <div class="col-sm-8">
+                        <input type="text" placeholder="Your New Edited Version" id="new-edited-feed" class="form-control">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                      <button type="submit" class="btn btn-danger" id="edit-feeder">Edit Feeder</button>
                     </div>
                   </div>
                 </form>
@@ -269,8 +373,9 @@ $messageCount = $message[0];
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/components-setup.min.js"></script>
 <script>
   $("#settings").addClass('active');
